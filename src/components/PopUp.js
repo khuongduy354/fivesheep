@@ -1,8 +1,8 @@
 import * as React from "react";
-const InCorrectPopup = () => {
+const InCorrectPopup = ({ popUpCb }) => {
   function IncorrectMessage() {
     return (
-      <div className="flex justify-center items-center px-16 py-20 w-full bg-black bg-opacity-30 max-md:px-5 max-md:max-w-full">
+      <div className="flex justify-center items-center px-16 py-20 w-full  max-md:px-5 max-md:max-w-full">
         <div className="flex flex-col items-center mt-48 mb-12 w-full max-w-[967px] max-md:my-10 max-md:max-w-full">
           <h1 className="text-8xl font-bold text-center text-white max-md:max-w-full max-md:text-4xl">
             INCORRECT
@@ -24,35 +24,24 @@ const InCorrectPopup = () => {
     );
   }
 
-  function AnswerButton({ text }) {
-    return (
-      <div className="flex flex-col w-6/12 max-md:ml-0 max-md:w-full">
-        <button
-          className="grow justify-center items-center px-16 py-7 w-full text-6xl font-bold text-center whitespace-nowrap bg-white border-solid border-[5px] border-black border-opacity-30 rounded-[65px] text-black text-opacity-30 max-md:px-5 max-md:mt-10 max-md:text-4xl"
-          aria-label={text}
-        >
-          {text}
-        </button>
-      </div>
-    );
-  }
-
-  const answerOptions = ["YES", "NO"];
-
   return (
-    <div className="flex flex-col justify-center bg-white">
+    <div className="flex flex-col justify-center bg-black bg-opacity-30">
       <IncorrectMessage />
-      {/* <div className="self-stretch mt-16 max-md:mt-10 max-md:max-w-full"> */}
-      {/* <div className="flex gap-5 max-md:flex-col max-md:gap-0">
-          {answerOptions.map((option, index) => (
-            <AnswerButton key={index} text={option} />
-          ))}
-        </div> */}
-      {/* </div> */}
+      <div className="flex gap-5 max-md:flex-col max-md:gap-0 justify-center items-center">
+        <div className="flex flex-col w-6/12 max-md:ml-0 max-md:w-full">
+          <button
+            onClick={popUpCb}
+            className="grow justify-center items-center px-16 py-7 w-full text-6xl font-bold text-center whitespace-nowrap bg-white border-solid border-[5px] border-black border-opacity-30 rounded-[65px] text-black text-opacity-30 max-md:px-5 max-md:mt-10 max-md:text-4xl"
+            aria-label={"Back"}
+          >
+            Back
+          </button>
+        </div>
+      </div>
     </div>
   );
 };
-const CorrectPopup = () => {
+const CorrectPopup = ({ popUpCb }) => {
   function CorrectMessage() {
     return (
       <div className="mt-6 text-8xl font-bold text-center text-white max-md:max-w-full max-md:text-4xl">
@@ -82,16 +71,6 @@ const CorrectPopup = () => {
     );
   }
 
-  function ChoiceButton({ children }) {
-    return (
-      <div className="flex flex-col w-6/12 max-md:ml-0 max-md:w-full">
-        <div className="grow justify-center items-center px-16 py-7 w-full text-6xl font-bold text-center text-lime-300 whitespace-nowrap bg-white border-lime-300 border-solid border-[5px] rounded-[65px] max-md:px-5 max-md:mt-10 max-md:text-4xl">
-          {children}
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div className="flex flex-col justify-center bg-white">
       <div className="flex justify-center items-center px-16 py-20 w-full bg-lime-300 bg-opacity-70 max-md:px-5 max-md:max-w-full">
@@ -104,19 +83,31 @@ const CorrectPopup = () => {
           <CorrectMessage />
           <CorrectSubMessage />
           <PointsMessage />
-          {/* <div className="self-stretch mt-20 max-md:mt-10 max-md:max-w-full">
-            <div className="flex gap-5 max-md:flex-col max-md:gap-0">
-              <ChoiceButton>YES</ChoiceButton>
-              <div className="flex flex-col ml-5 w-6/12 max-md:ml-0 max-md:w-full">
-                <ChoiceButton>NO</ChoiceButton>
+          <div className="self-stretch mt-20 max-md:mt-10 max-md:max-w-full">
+            <div className="flex gap-5 max-md:flex-col max-md:gap-0 justify-center items-center">
+              <div className="flex flex-col w-6/12 max-md:ml-0 max-md:w-full">
+                <button
+                  onClick={popUpCb}
+                  className="grow justify-center items-center px-16 py-7 w-full text-6xl font-bold text-center text-lime-300 whitespace-nowrap bg-white border-lime-300 border-solid border-[5px] rounded-[65px] max-md:px-5 max-md:mt-10 max-md:text-4xl"
+                >
+                  Back
+                </button>
               </div>
             </div>
-          </div> */}
+          </div>
         </div>
       </div>
     </div>
   );
 };
-export const PopUp = ({ isCorrect = true }) => {
-  return <div>{isCorrect ? <CorrectPopup /> : <InCorrectPopup />}</div>;
+export const PopUp = ({ isCorrect = true, popUpCb = () => {} }) => {
+  return (
+    <div>
+      {isCorrect ? (
+        <CorrectPopup popUpCb={popUpCb} />
+      ) : (
+        <InCorrectPopup popUpCb={popUpCb} />
+      )}
+    </div>
+  );
 };

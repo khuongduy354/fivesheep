@@ -31,6 +31,7 @@ export const QuestionLoader = ({ id = 0 }) => {
     scrollBottom();
   };
 
+  const [popup, setPopup] = useState(-1); // -1 for correct, 1 for correct, 0 not shown
   const MainQuestion = () => {
     return (
       <div
@@ -68,24 +69,21 @@ export const QuestionLoader = ({ id = 0 }) => {
     );
   };
   const onDecisionMade = (ansObj) => {
-    switch (ansObj.state) {
-      case 1:
-        alert("Correct");
-        break;
-      case -1:
-        alert("Incorrect");
-        break;
-      case 0:
-        alert("Neutral");
-        break;
-      default:
-        break;
-    }
+    setPopup(ansObj.state);
     setDecision(null);
+  };
+  const popUpCb = () => {
+    setPopup(0);
   };
   return (
     <div>
-      {decision ? (
+      {popup !== 0 ? (
+        <PopUp
+          popUpCb={popUpCb}
+          isCorrect={popup === 1}
+          onClick={() => setPopup(0)}
+        />
+      ) : decision ? (
         <ShowDecision onClick={onDecisionMade} decision={decision} />
       ) : (
         <MainQuestion />
@@ -98,7 +96,6 @@ export const QuestionLoader = ({ id = 0 }) => {
       >
         Continue
       </button>
-      <PopUp isCorrect={1} />
     </div>
   );
 };
