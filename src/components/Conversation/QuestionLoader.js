@@ -7,7 +7,7 @@ import { AppContext } from "../../App";
 
 export const QuestionLoader = ({ id = 0 }) => {
   const [convos, setConvos] = useState([]);
-  const { setNav } = useContext(AppContext);
+  const { setNav, api } = useContext(AppContext);
   const [currentIdx, setCurrentIdx] = useState(0);
   const [decision, setDecision] = useState(null);
   const bottomRef = useRef(null);
@@ -76,8 +76,8 @@ export const QuestionLoader = ({ id = 0 }) => {
                   <p
                     className={`${
                       isFromCuu
-                        ? "bg-[#B4FF55] text-white"
-                        : "bg-[#F5F5F5] text-[#B4FF55]"
+                        ? "bg-[#579c00] text-white"
+                        : "bg-[#F5F5F5] text-[#579c00]"
                     }  rounded-lg py-2 px-4 inline-block`}
                   >
                     <b>{conver.content}</b>
@@ -91,6 +91,11 @@ export const QuestionLoader = ({ id = 0 }) => {
     );
   };
   const onDecisionMade = (ansObj) => {
+    if (ansObj.state !== 0)
+      api.updateWool(ansObj.state * 10).then((res) => {
+        console.log(res.ok ? "Updated wool" : "Failed to update wool");
+      });
+
     setPopup(ansObj.state);
     setDecision(null);
   };

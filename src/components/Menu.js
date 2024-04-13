@@ -32,7 +32,8 @@ function Button({ children, className, onClick }) {
 
 export function Menu() {
   const [isSignedIn, setIsSignedIn] = React.useState(false);
-  const { setNav } = React.useContext(AppContext);
+  const { setNav, setApi } = React.useContext(AppContext);
+
   React.useEffect(() => {
     supabase.auth.getUser().then((res) => {
       setIsSignedIn(res.data.user ? true : false);
@@ -41,6 +42,7 @@ export function Menu() {
   supabase.auth.onAuthStateChange(async (event, session) => {
     if (event == "SIGNED_IN") {
       setIsSignedIn(true);
+      setApi(new BEApi(session.access_token));
     } else if (event == "SIGNED_OUT") {
       setIsSignedIn(false);
     }
