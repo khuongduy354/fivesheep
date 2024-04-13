@@ -82,6 +82,7 @@ function ImageGrid() {
 }
 
 export function Lessons() {
+  const { setNav } = React.useContext(AppContext);
   const navItems = [
     {
       icon: "https://cdn.builder.io/api/v1/image/assets/TEMP/e800d9c57839ff4068b7044bd09b99e142e5c05246cdd9e0f2815ff4b0e24dec?apiKey=c7cedd2849df4eb1b7f55f128f5c00ae&",
@@ -106,7 +107,12 @@ export function Lessons() {
       <nav className="flex z-10 gap-24 self-start text-base font-bold text-lime-300 whitespace-nowrap">
         <div className="flex flex-col self-start mt-40 max-md:mt-10">
           {navItems.map((item, index) => (
-            <div
+            <button
+              onClick={() => {
+                if (item.label === "MISSION") {
+                  setNav("game");
+                }
+              }}
               key={index}
               className={`flex gap-${index === 0 ? 4 : 5} ${
                 index === 0 ? "text-white" : ""
@@ -133,7 +139,7 @@ export function Lessons() {
               >
                 {item.label}
               </div>
-            </div>
+            </button>
           ))}
         </div>
         <div className="shrink-0 border-solid bg-neutral-100 border-[3px] border-neutral-100 h-[832px] w-[3px]" />

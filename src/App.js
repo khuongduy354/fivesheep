@@ -3,6 +3,7 @@ import { Menu } from "./components/Menu";
 import { QuestionLoader } from "./components/Conversation/QuestionLoader";
 import { Roadmap } from "./components/Roadmap";
 import { createContext, useState } from "react";
+import { GamePage } from "./components/GamePage";
 
 export const AppContext = createContext({ nav: "menu", setNav: () => {} });
 function App() {
@@ -13,6 +14,7 @@ function App() {
       {nav === "lessons" && <Lessons />}
       {nav === "roadmap" && <Roadmap />}
       {nav === "question" && <QuestionLoader />}
+      {nav === "game" && <GamePage />}
     </AppContext.Provider>
   );
 }
