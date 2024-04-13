@@ -79,6 +79,13 @@ export const multileChoices = [
       },
 
       { from: "annon", to: "sheep", content: "dasffdsf", decisionIdx: 0 },
+      {
+        from: "annon",
+        to: "Cừu",
+        content: "dasffdsf",
+        attachment: "phishedsheep.png",
+        decisionIdx: -1,
+      },
     ],
     decisions: [
       {

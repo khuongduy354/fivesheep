@@ -66,7 +66,9 @@ export const QuestionLoader = ({ id = 0 }) => {
           >
             {convos.map((conver, idx) => {
               const isFromCuu = conver.from === "Cừu";
-              return (
+              return conver.attachment !== undefined ? (
+                <img src={require("../../assets/" + conver.attachment)} />
+              ) : (
                 <div
                   key={idx}
                   className={`mb-2 ${isFromCuu ? "text-right" : "text-left"}`}
@@ -98,6 +100,7 @@ export const QuestionLoader = ({ id = 0 }) => {
   return (
     <div>
       <BackButton />
+
       {popup !== 0 ? (
         <PopUp
           popUpCb={popUpCb}
