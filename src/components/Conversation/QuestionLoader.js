@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import { multileChoices } from "../../question-dataset";
 import { useEffect } from "react";
 import { ShowDecision } from "./DecisionViewer";
+import { PopUp } from "../PopUp";
 
 export const QuestionLoader = ({ id = 0 }) => {
   const [convos, setConvos] = useState([]);
@@ -97,6 +98,7 @@ export const QuestionLoader = ({ id = 0 }) => {
       >
         Continue
       </button>
+      <PopUp isCorrect={1} />
     </div>
   );
 };

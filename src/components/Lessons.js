@@ -1,22 +1,27 @@
 import * as React from "react";
+import { AppContext } from "../App";
 
 function BackButton() {
+  const { setNav } = React.useContext(AppContext);
   return (
     <div className="ml-12 flex flex-row justify-between gap-2.5 whitespace-nowrap text-slate-700">
       <div className="">
-        <img
-          loading="lazy"
-          src="https://cdn.builder.io/api/v1/image/assets/TEMP/c7ee6b583d38e80af3e9c934327bfa408d3c7a4995ccba0c28a5a3c908e0a683?apiKey=c7cedd2849df4eb1b7f55f128f5c00ae&"
-          className="shrink-0 w-6 aspect-square"
-          alt=""
-        />
-        <div className="my-auto">Back</div>
+        <button onClick={() => setNav("menu")} className="my-auto">
+          <img
+            loading="lazy"
+            src="https://cdn.builder.io/api/v1/image/assets/TEMP/c7ee6b583d38e80af3e9c934327bfa408d3c7a4995ccba0c28a5a3c908e0a683?apiKey=c7cedd2849df4eb1b7f55f128f5c00ae&"
+            className="shrink-0 w-6 aspect-square"
+            alt=""
+          />
+          Back
+        </button>
       </div>
     </div>
   );
 }
 
 function TopicCard({ title, progress, description, buttonText }) {
+  const { setNav } = React.useContext(AppContext);
   return (
     <div className="flex flex-row items-start pt-5 pr-20 pb-9 pl-5 mt-20 ml-3.5 text-white bg-lime-300 rounded-xl max-md:pr-5 max-md:mt-10 max-md:max-w-full">
       <div>
@@ -27,7 +32,10 @@ function TopicCard({ title, progress, description, buttonText }) {
         <p className="mt-4 ml-9 font-light text-lime-600 max-md:ml-2.5">
           {description}
         </p>
-        <button className="justify-center px-11 py-3.5 mt-6 whitespace-nowrap bg-lime-600 rounded-[65px] max-md:px-5">
+        <button
+          onClick={() => setNav("roadmap")}
+          className="justify-center px-11 py-3.5 mt-6 whitespace-nowrap bg-lime-600 rounded-[65px] max-md:px-5"
+        >
           {buttonText}
         </button>
       </div>

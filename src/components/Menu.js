@@ -3,6 +3,7 @@ import { supabase } from "../helper/supabase";
 import sheepImg from "../assets/sheep.png";
 import schoolLogo from "../assets/school-logo.png";
 import langIcon from "../assets/lang-icon.svg";
+import { AppContext } from "../App";
 
 function LanguageSelector() {
   return (
@@ -31,6 +32,7 @@ function Button({ children, className, onClick }) {
 
 export function Menu() {
   const [isSignedIn, setIsSignedIn] = React.useState(false);
+  const { setNav } = React.useContext(AppContext);
   React.useEffect(() => {
     supabase.auth.getUser().then((res) => {
       setIsSignedIn(res.data.user ? true : false);
@@ -87,6 +89,7 @@ export function Menu() {
                 onClick={() => {
                   if (isSignedIn) {
                     // supabase.auth.signOut();
+                    setNav("lessons");
                   } else {
                     signInGG();
                   }

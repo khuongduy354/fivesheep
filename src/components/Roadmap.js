@@ -1,4 +1,5 @@
 import * as React from "react";
+import { AppContext } from "../App";
 
 function BackButton() {
   return (
@@ -42,6 +43,7 @@ function Header() {
 }
 
 function LessonButton() {
+  const { setNav } = React.useContext(AppContext);
   return (
     <div className="flex overflow-hidden relative flex-col px-10 py-5 text-base font-bold aspect-[2.8] fill-lime-300 w-[241px] max-md:px-5 max-md:mt-10">
       <img
@@ -49,7 +51,14 @@ function LessonButton() {
         alt=""
         className="object-cover absolute inset-0 size-full"
       />
-      <div className="relative text-white">Start your first lesson</div>
+      <button
+        onClick={() => {
+          setNav("question");
+        }}
+        className="relative text-white"
+      >
+        Start your first lesson
+      </button>
       <div className="relative justify-center self-center px-5 py-1.5 mt-2.5 text-lime-300 rounded-2xl bg-neutral-100">
         Let's go!
       </div>
@@ -57,20 +66,26 @@ function LessonButton() {
   );
 }
 
-function RoundImage({ src, alt }) {
+function RoundImage({ src, alt, onMouseOver = () => {} }) {
   return (
-    <div className="flex overflow-hidden relative flex-col justify-center items-center rounded-full aspect-square bg-neutral-100 h-[62px] w-[62px]">
+    <div
+      onClick={() => onMouseOver(true)}
+      className="flex overflow-hidden relative flex-col justify-center items-center rounded-full aspect-square bg-neutral-100 h-[62px] w-[62px]"
+    >
       <img
         src={src}
         alt={alt}
         className="object-cover absolute inset-0 size-full"
       />
-      <div className="relative shrink-0 w-full rounded-full bg-neutral-100 h-[62px]" />
     </div>
   );
 }
 
 export function Roadmap() {
+  const [mousedOver, setMousedOver] = React.useState(false);
+  const onMouseOver = (val) => {
+    setMousedOver(val);
+  };
   return (
     <div className="flex flex-col items-center px-5 pb-20 bg-white max-md:px-5">
       <main className="flex z-10 flex-col mt-0 w-full max-w-[1017px] max-md:mt-0 max-md:max-w-full">
@@ -79,11 +94,30 @@ export function Roadmap() {
           Part 1: Phishing
         </h1>
       </main>
-      <img
-        src="https://cdn.builder.io/api/v1/image/assets/TEMP/024c3e09c5bfd0bbc172ab06909b78c6cf13a600f5031f4792a8a8c493b057c0?apiKey=c7cedd2849df4eb1b7f55f128f5c00ae&"
-        alt=""
-        className="mt-20 bg-lime-300 rounded-full aspect-square h-[62px] w-[62px] max-md:mt-10"
-      />
+      {mousedOver ? (
+        <img
+          src="https://cdn.builder.io/api/v1/image/assets/TEMP/024c3e09c5bfd0bbc172ab06909b78c6cf13a600f5031f4792a8a8c493b057c0?apiKey=c7cedd2849df4eb1b7f55f128f5c00ae&"
+          alt=""
+          className="bg-white-300 rounded-full aspect-square h-[62px] w-[62px] "
+          onClick={() => onMouseOver(false)}
+        />
+      ) : (
+        <RoundImage
+          src="https://cdn.builder.io/api/v1/image/assets/TEMP/a1f0b42c9af65baba261dc706b63595603329f34747b01a15631998b4fc9ce7a?apiKey=c7cedd2849df4eb1b7f55f128f5c00ae&"
+          alt=""
+          className="shrink-0 self-end "
+          onMouseOver={() => onMouseOver(true)}
+        />
+      )}
+      {mousedOver && (
+        <div className="z-10 self-end -mt-0 max-w-full w-[606px] max-md:mr-1.5">
+          <div className="flex gap-5 max-md:flex-col max-md:gap-0">
+            <div className="flex flex-col w-[42%] max-md:ml-0 max-md:w-full">
+              <LessonButton />
+            </div>
+          </div>
+        </div>
+      )}
       <div className="flex z-10 gap-5 justify-between items-start mt-0 max-w-full w-[189px]">
         <img
           src="https://cdn.builder.io/api/v1/image/assets/TEMP/6659ae24484dc604753f7b4273cfaecfe039cec72e14fb72aa96f15286c99558?apiKey=c7cedd2849df4eb1b7f55f128f5c00ae&"
@@ -93,17 +127,8 @@ export function Roadmap() {
         <RoundImage
           src="https://cdn.builder.io/api/v1/image/assets/TEMP/a1f0b42c9af65baba261dc706b63595603329f34747b01a15631998b4fc9ce7a?apiKey=c7cedd2849df4eb1b7f55f128f5c00ae&"
           alt=""
+          className="shrink-0 self-end mt-48 max-md:mt-10"
         />
-      </div>
-      <div className="z-10 self-end -mt-0 max-w-full w-[606px] max-md:mr-1.5">
-        <div className="flex gap-5 max-md:flex-col max-md:gap-0">
-          <div className="flex flex-col w-[42%] max-md:ml-0 max-md:w-full">
-            <LessonButton />
-          </div>
-          {/* <div className="flex flex-col ml-5 w-[58%] max-md:ml-0 max-md:w-full">
-            <div className="shrink-0 mx-auto mt-16 max-w-full h-64 bg-white rounded-2xl border border-lime-300 border-solid w-[327px] max-md:mt-10" />
-          </div> */}
-        </div>
       </div>
       <div className="flex gap-4 items-start mt-0 max-md:mt-0">
         <div className="flex flex-col self-start">
@@ -113,13 +138,9 @@ export function Roadmap() {
               alt="Character 2"
               className="shrink-0 max-w-full aspect-square w-[133px]"
             />
-            {/* <RoundImage
-              src="https://cdn.builder.io/api/v1/image/assets/TEMP/3f0403ef61be9576f567c741484ca61f190ec423b1b33986a01e811257d66908?apiKey=c7cedd2849df4eb1b7f55f128f5c00ae&"
-              alt=""
-            /> */}
           </div>
           <div className="flex flex-col justify-center self-end mr-8 rounded-full bg-neutral-100 w-[81px] max-md:mr-2.5">
-            <div className="flex justify-center items-center px-5 py-4 bg-lime-300 rounded-full">
+            <div className="flex justify-center items-center px-5 py-4 bg-white-300 rounded-full">
               <div className="flex overflow-hidden relative flex-col justify-center items-center aspect-square w-[43px]">
                 <img
                   src="https://cdn.builder.io/api/v1/image/assets/TEMP/9564769ca0765e4c8904d4aaee2962a3540a8489ee4f3ad71f0ad659a37369f3?apiKey=c7cedd2849df4eb1b7f55f128f5c00ae&"
@@ -147,15 +168,15 @@ export function Roadmap() {
         className="mt-4 max-w-full aspect-square w-[114px]"
       />
       <div className="flex z-10 gap-5 justify-between items-start mt-0">
-        <RoundImage
-          src="https://cdn.builder.io/api/v1/image/assets/TEMP/3f0403ef61be9576f567c741484ca61f190ec423b1b33986a01e811257d66908?apiKey=c7cedd2849df4eb1b7f55f128f5c00ae&"
-          alt=""
-          className="self-end mt-11 max-md:mt-10"
-        />
         <img
           src="https://cdn.builder.io/api/v1/image/assets/TEMP/6659ae24484dc604753f7b4273cfaecfe039cec72e14fb72aa96f15286c99558?apiKey=c7cedd2849df4eb1b7f55f128f5c00ae&"
           alt="Character 5"
           className="shrink-0 self-start aspect-square w-[73px]"
+        />
+        <RoundImage
+          src="https://cdn.builder.io/api/v1/image/assets/TEMP/a1f0b42c9af65baba261dc706b63595603329f34747b01a15631998b4fc9ce7a?apiKey=c7cedd2849df4eb1b7f55f128f5c00ae&"
+          alt=""
+          className="shrink-0 self-end mt-48 max-md:mt-10"
         />
       </div>
     </div>
