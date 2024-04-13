@@ -68,3 +68,62 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+/* - auth check  */
+- pages: menu page, lessons learning & roadmap page done 
+- navigation 
+
+- conversation with images loaded, frame  
+- reward popup,  
+- game page 
+
+ 
+- discuss further  
++ permission 
++ lessons stored on db   
++ game sudden attacks, limit game time 
+
+
+
+
+# DEV
+- Tech stack 
+- Architecture 
+- Question rendering from dataset
+```js
+export const multileChoices = [
+  {
+    conversations: [
+      {
+        from: "",
+        to: "Cừu",
+        content:
+          "Hôm nay hãy cùng cừu lên mạng xã hội để xem có thông tin gì vui nhé!",
+        decisionIdx: -1, 
+        // -1 means it's a casual text, if idx != -1, load from decisions array below, 
+        // for e.g decisionIdx: 2 loads decisions[2]
+      }
+    ],
+    decisions: [
+      {
+        avatar: "../src/assets/sheep.png",
+        question: "Bạn nhỏ ơi, Cừu có nên quét mã tham gia không?",
+        answers: [
+          {
+            idxLetter: "A",
+            answer:
+              " Nút hành động 1: Tất nhiên rồi, đây là bạn cùng trường mà!",
+            state: -1, // 1 correct, -1 incorrect, 0 neutral
+          },
+          {
+            idxLetter: "B",
+            answer:
+              "Nút hành động 2: Tớ nghĩ là Cừu cần thêm thông tin về cuộc thi này đó!",
+            state: 1,
+          },
+        ],
+      },
+    ],
+  },
+];
+```
