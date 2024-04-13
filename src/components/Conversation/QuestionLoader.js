@@ -32,30 +32,35 @@ export const QuestionLoader = ({ id = 0 }) => {
 
   const MainQuestion = () => {
     return (
-      <div>
-        <div id="chat-container" className="flex content-center justify-center">
-          <div class="bg-white shadow-md rounded-lg w-2/3">
-            <div ref={bottomRef} id="chatbox" class=" p-4 h-80 overflow-y-auto">
-              {convos.map((conver, idx) => {
-                const isFromCuu = conver.from === "Cừu";
-                return (
-                  <div
-                    key={idx}
-                    className={`mb-2 ${isFromCuu ? "text-right" : "text-left"}`}
+      <div
+        id="chat-container"
+        className="flex content-center justify-center items-center h-[100vh]"
+      >
+        <div class="bg-white shadow-md rounded-lg w-2/3">
+          <div
+            ref={bottomRef}
+            id="chatbox"
+            class=" p-4 h-[70vh] overflow-y-auto"
+          >
+            {convos.map((conver, idx) => {
+              const isFromCuu = conver.from === "Cừu";
+              return (
+                <div
+                  key={idx}
+                  className={`mb-2 ${isFromCuu ? "text-right" : "text-left"}`}
+                >
+                  <p
+                    className={`${
+                      isFromCuu
+                        ? "bg-[#B4FF55] text-white"
+                        : "bg-[#F5F5F5] text-[#B4FF55]"
+                    }  rounded-lg py-2 px-4 inline-block`}
                   >
-                    <p
-                      className={`${
-                        isFromCuu
-                          ? "bg-[#B4FF55] text-white"
-                          : "bg-[#F5F5F5] text-[#B4FF55]"
-                      }  rounded-lg py-2 px-4 inline-block`}
-                    >
-                      <b>{conver.content}</b>
-                    </p>
-                  </div>
-                );
-              })}
-            </div>
+                    <b>{conver.content}</b>
+                  </p>
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>
