@@ -13,13 +13,13 @@ export function GamePage() {
     }
   };
   useEffect(() => {
-    const interval = setInterval(() => {
-      api.getAttack().then((_attack) => {
-        if (_attack) {
-          setAttack(_attack);
-        }
-      });
-    }, 1000 * 60);
+    const interval = setInterval(() => {}, 1000 * 60);
+    api.getAttack().then((_attack) => {
+      if (_attack) {
+        console.log(_attack);
+        setAttack(_attack);
+      }
+    });
     return () => {
       clearInterval(interval);
     };

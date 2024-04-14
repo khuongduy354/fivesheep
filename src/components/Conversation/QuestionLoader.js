@@ -91,10 +91,17 @@ export const QuestionLoader = ({ id = 0 }) => {
     );
   };
   const onDecisionMade = (ansObj) => {
-    if (ansObj.state !== 0)
-      api.updateWool(ansObj.state * 10).then((res) => {
-        console.log(res.ok ? "Updated wool" : "Failed to update wool");
+    if (ansObj.state !== 0) {
+      let points = 0;
+      if (ansObj.state === 1) {
+        points = 10;
+      } else {
+        points = -5;
+      }
+      api.updateWool(points).then((res) => {
+        console.log(res.ok ? "Updated wool" : res);
       });
+    }
 
     setPopup(ansObj.state);
     setDecision(null);

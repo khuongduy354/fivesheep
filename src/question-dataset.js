@@ -155,7 +155,7 @@ export const multileChoices = [
           {
             idxLetter: "A",
             answer: "Nộp đơn",
-            state: -1, // 1 correct, -1 incorrect, 0 neutral
+            state: 0, // 1 correct, -1 incorrect, 0 neutral
           },
         ],
       },
@@ -167,7 +167,7 @@ export const multileChoices = [
           {
             idxLetter: "A",
             answer: "Báo phụ huynh",
-            state: -1, // 1 correct, -1 incorrect, 0 neutral
+            state: 0, // 1 correct, -1 incorrect, 0 neutral
 
             // TODO: jump to sol
             jumpTo: -1, // -1 = jump to end conversation, X = jump to Xth conversation, leave empty = no jump
@@ -175,21 +175,14 @@ export const multileChoices = [
           {
             idxLetter: "A",
             answer: "Gọi tư vấn 111",
-            state: -1, // 1 correct, -1 incorrect, 0 neutral
+            state: 0, // 1 correct, -1 incorrect, 0 neutral
             // TODO: jump to sol
             jumpTo: -1, // -1 = jump to end conversation, X = jump to Xth conversation, leave empty = no jump
           },
           {
             idxLetter: "A",
             answer: "Báo cô giáo",
-            state: -1, // 1 correct, -1 incorrect, 0 neutral
-            // TODO: jump to sol
-            jumpTo: -1, // -1 = jump to end conversation, X = jump to Xth conversation, leave empty = no jump
-          },
-          {
-            idxLetter: "A",
-            answer: "Báo cô giáo",
-            state: -1, // 1 correct, -1 incorrect, 0 neutral
+            state: 0, // 1 correct, -1 incorrect, 0 neutral
             // TODO: jump to sol
             jumpTo: -1, // -1 = jump to end conversation, X = jump to Xth conversation, leave empty = no jump
           },
