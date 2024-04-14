@@ -4,6 +4,9 @@ Frontend for SSchool
 # Tech Stack 
 
 React
-Nodejs 
-MongoDB 
+
+Nodejs
+
+MongoDB
+
 PostgresSQL
