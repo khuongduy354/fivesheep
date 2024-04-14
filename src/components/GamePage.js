@@ -1,7 +1,29 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../App";
+import { Interactor } from "./EmulatedWebs/Interactor";
 
 export function GamePage() {
+  const { api } = useContext(AppContext);
+  const [attack, setAttack] = useState(null);
+  const attackCb = (isAttacked) => {
+    if (isAttacked) {
+      alert("Attacked");
+    } else {
+      alert("Not attacked");
+    }
+  };
+  useEffect(() => {
+    const interval = setInterval(() => {
+      api.getAttack().then((_attack) => {
+        if (_attack) {
+          setAttack(_attack);
+        }
+      });
+    }, 1000 * 60);
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
   function BackButton() {
     const { setNav } = useContext(AppContext);
     return (
@@ -23,15 +45,19 @@ export function GamePage() {
   return (
     <div>
       <BackButton />
-      <div className="flex justify-center items-center h-[100vh]">
-        <iframe
-          id="inlineFrameExample"
-          title="Inline Frame Example"
-          width="1200"
-          height="500"
-          src="https://khuongduy354.github.io/sudoku-fe/"
-        ></iframe>
-      </div>
+      {!attack ? (
+        <div className="flex justify-center items-center h-[100vh]">
+          <iframe
+            id="inlineFrameExample"
+            title="Inline Frame Example"
+            width="1200"
+            height="500"
+            src="https://khuongduy354.github.io/sudoku-fe/"
+          ></iframe>
+        </div>
+      ) : (
+        <Interactor attackCb={attackCb} attackType={attack.attackType} />
+      )}
     </div>
   );
 }

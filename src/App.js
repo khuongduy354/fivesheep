@@ -5,6 +5,7 @@ import { BEApi } from "./api";
 import { Roadmap } from "./components/Roadmap";
 import { createContext, useState } from "react";
 import { GamePage } from "./components/GamePage";
+import { Interactor } from "./components/EmulatedWebs/Interactor";
 
 export const AppContext = createContext({
   nav: "menu",

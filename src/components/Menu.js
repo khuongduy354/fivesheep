@@ -4,6 +4,7 @@ import sheepImg from "../assets/sheep.png";
 import schoolLogo from "../assets/school-logo.png";
 import langIcon from "../assets/lang-icon.svg";
 import { AppContext } from "../App";
+import { BEApi } from "../api";
 
 function LanguageSelector() {
   return (
