@@ -68,7 +68,7 @@ export const multileChoices = [
       {
         from: "Bạn mới",
         to: "Cừu",
-        content: "Tớ gửi mã QR, Cừu quét rồi nghiên cứu tham gia nha!",
+        content: "Tớ gửi link cuộc thi, Cừu quét rồi nghiên cứu tham gia nha!",
         decisionIdx: -1,
       },
       {
@@ -77,8 +77,30 @@ export const multileChoices = [
         content: "Hoạt động gì mà tớ không biết vậy nhỉ?",
         decisionIdx: 0,
       },
+      // First action: send link
+      {
+        from: "annon",
+        to: "sheep",
+        content: "https://faceboook.net/login",
+        decisionIdx: -1,
+      },
+      {
+        from: "Cừu",
+        to: "Cừu",
+        content: "dasffdsf",
+        attachment: "phishedsheep.png",
+        decisionIdx: -1,
+      },
+      { from: "annon", to: "sheep", content: "", decisionIdx: 1 },
+      // Second action: after link
+      {
+        from: "annon",
+        to: "sheep",
+        content: "Bạn ơi, tiếp tục cùng Cừu dạo mạng xã hội nhé!",
+        decisionIdx: -1,
+      },
 
-      { from: "annon", to: "sheep", content: "dasffdsf", decisionIdx: 0 },
+      // TODO: noi xau co giao
       {
         from: "annon",
         to: "Cừu",
@@ -86,16 +108,35 @@ export const multileChoices = [
         attachment: "phishedsheep.png",
         decisionIdx: -1,
       },
+      {
+        from: "Cừu",
+        to: "sheep",
+        content:
+          "Bạn nhỏ ơi Cừu sợ quá, tại sao lại có bài đăng này, đây không phải bài dăng do cừu làm đâu!",
+        decisionIdx: -1,
+      },
+      {
+        from: "Cừu",
+        to: "sheep",
+        content:
+          "Bạn nhỏ ơi, Cừu xấu hổ quá, Cừu không biết phải làm gì, Cừu phải làm gì bây giờ?",
+        decisionIdx: 2,
+      },
+      {
+        from: "Teacher",
+        to: "sheep",
+        content: "",
+        decisionIdx: 3,
+      },
     ],
     decisions: [
       {
         avatar: "../src/assets/sheep.png",
-        question: "Bạn nhỏ ơi, Cừu có nên quét mã tham gia không?",
+        question: "Bạn nhỏ ơi, Cừu có nên đăng ký tham gia không?",
         answers: [
           {
             idxLetter: "A",
-            answer:
-              " Nút hành động 1: Tất nhiên rồi, đây là bạn cùng trường mà!",
+            answer: "Tất nhiên rồi, đây là bạn cùng trường mà!",
             state: -1, // 1 correct, -1 incorrect, 0 neutral
           },
           {
@@ -103,8 +144,68 @@ export const multileChoices = [
             answer:
               "Nút hành động 2: Tớ nghĩ là Cừu cần thêm thông tin về cuộc thi này đó!",
             state: 1,
+            jumpTo: -1, // -1 = jump to end conversation, X = jump to Xth conversation, leave empty = no jump
           },
         ],
+      },
+      {
+        avatar: "../src/assets/sheep.png",
+        question: "Bạn nhỏ ơi, hãy nhấn nộp đơn giúp Cừu nhé!",
+        answers: [
+          {
+            idxLetter: "A",
+            answer: "Nộp đơn",
+            state: -1, // 1 correct, -1 incorrect, 0 neutral
+          },
+        ],
+      },
+      {
+        avatar: "../src/assets/sheep.png",
+        question:
+          "Bạn nhỏ ơi, Cừu xấu hổ quá, Cừu không biết phải làm gì, Cừu phải làm gì bây giờ?",
+        answers: [
+          {
+            idxLetter: "A",
+            answer: "Báo phụ huynh",
+            state: -1, // 1 correct, -1 incorrect, 0 neutral
+
+            // TODO: jump to sol
+            jumpTo: -1, // -1 = jump to end conversation, X = jump to Xth conversation, leave empty = no jump
+          },
+          {
+            idxLetter: "A",
+            answer: "Gọi tư vấn 111",
+            state: -1, // 1 correct, -1 incorrect, 0 neutral
+            // TODO: jump to sol
+            jumpTo: -1, // -1 = jump to end conversation, X = jump to Xth conversation, leave empty = no jump
+          },
+          {
+            idxLetter: "A",
+            answer: "Báo cô giáo",
+            state: -1, // 1 correct, -1 incorrect, 0 neutral
+            // TODO: jump to sol
+            jumpTo: -1, // -1 = jump to end conversation, X = jump to Xth conversation, leave empty = no jump
+          },
+          {
+            idxLetter: "A",
+            answer: "Báo cô giáo",
+            state: -1, // 1 correct, -1 incorrect, 0 neutral
+            // TODO: jump to sol
+            jumpTo: -1, // -1 = jump to end conversation, X = jump to Xth conversation, leave empty = no jump
+          },
+        ],
+      },
+      {
+        avatar: "../src/assets/teacher.png",
+        question: `Cừu đang bị đăng tải thông tin sai sự thật bằng tài khoản của mình vì đã đăng nhập thông tin vào link không chính thống đó Cừu ơi! Con đừng sợ, để cô giúp con lý giải nhé!
+
+Thứ nhất, danh tính của người bạn mới này! Con chưa biết cụ thể đây là ai, do vậy con không được hoàn toàn tin tưởng người ta như vậy nhé! 
+=> Người xấu đã giả mạo danh tính để tiếp cận con
+
+Thứ hai, con nhận một mã yêu cầu con cung cấp thông tin, con phải cẩn trọng nhé! Hình ảnh của con bị lộ là do những lần con cung cấp thông tin nhé vậy đấy!
+=> Người xấu đã đánh cắp thông tin của con 
+`,
+        answers: [],
       },
     ],
   },
